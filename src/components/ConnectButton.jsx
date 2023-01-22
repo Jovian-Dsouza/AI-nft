@@ -12,7 +12,7 @@ export function ConnectButton(props) {
     }
     const accounts = await ethereum.request({ method: "eth_accounts" });
 
-    if (accounts.length != 0) {
+    if (accounts.length !== 0) {
       setCurrentAccount(accounts[0]);
     } else {
       console.log("Could not find authorized account");
