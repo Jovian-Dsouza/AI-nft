@@ -10,7 +10,7 @@ export function Input(props) {
       return;
     }
     props.onCreate(promptText);
-    //TODO reset promptText
+    setPromptText("");
   }
 
   return (

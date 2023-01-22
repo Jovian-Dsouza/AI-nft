@@ -6,7 +6,7 @@ import { Input } from "./components/Input";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { ConnectButton } from "./components/ConnectButton";
-import { predict } from "./scripts/replicate-api";
+import { Prediction } from "./components/Prediction";
 
 console.log(process.env.REACT_APP_BASE_URL);
 // Constants
@@ -24,6 +24,7 @@ examples = examples.map((title) => {
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
+
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window;
     if (!ethereum) {
@@ -39,41 +40,7 @@ const App = () => {
     }
   };
 
-  const getPrediction = async (prompt) => {
-    const input = {
-      prompt: prompt,
-      num_outputs: 1,
-      width: 768,
-      height: 768,
-      num_inference_steps: 50,
-      guidance_scale: 7.5,
-      scheduler: "DPMSolverMultistep",
-    };
-
-    try {
-      let output = await predict(
-        `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_PATH}`,
-        process.env.REACT_APP_API_KEY,
-        process.env.REACT_APP_MODEL_VERSION,
-        input
-      );
-      console.log(output);
-      return output;
-    } catch (error) {
-      console.error(error);
-    }
-    return null;
-  }
-
-  const handleOnCreate = (promptText) => {
-    console.log("Prompt Text ", promptText);
-    let output = null;
-    (async () => {
-      output = await getPrediction(promptText);
-      console.log(output);
-    })();
-    
-  };
+  
 
   useEffect(() => {
     checkIfWalletIsConnected();
@@ -104,8 +71,8 @@ const App = () => {
                 <br />
                 Click on Create button to get your own NFT now.
               </p>
-
-              <Input onCreate={handleOnCreate} />
+              
+              <Prediction />
             </div>
 
             {/* Carousel  */}
