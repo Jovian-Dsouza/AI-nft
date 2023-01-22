@@ -40,45 +40,13 @@
   -webkit-text-fill-color: transparent;
 }
 
-.cta-button {
-  height: 45px;
-  border: 0;
-  width: auto;
-  padding-left: 40px;
-  padding-right: 40px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-}
 
-.connect-wallet-button {
-  background: -webkit-linear-gradient(left, #60c657, #35aee2);
-  background-size: 200% 200%;
-  animation: gradient-animation 4s ease infinite;
-  margin-right: 4rem;
-}
 
 .mint-button {
   background: -webkit-linear-gradient(left, #a200d6, #ff6fdf);
   background-size: 200% 200%;
   animation: gradient-animation 4s ease infinite;
   margin-right: 2rem;
-}
-
-.navbar-nav {
-  /* margin-left: auto; */
-  width: 100%;
-  max-width: none;
-}
-.nav-mint-button {
-  margin-left: auto;
-}
-
-.nav-link {
-  margin : auto 0.6rem;
-  font-size: 1.1rem;
 }
 
 .opensea-button {
@@ -91,23 +59,7 @@
   font-weight: bold;
 }
 
-.footer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-}
 
-.twitter-logo {
-  width: 35px;
-  height: 35px;
-}
-
-.footer-text {
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
 
 /* KeyFrames */
 @-webkit-keyframes gradient-animation {

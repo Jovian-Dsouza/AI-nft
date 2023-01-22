@@ -1,0 +1,15 @@
+.navbar-nav {
+    /* margin-left: auto; */
+    width: 100%;
+    max-width: none;
+}
+
+.nav-mint-button {
+    margin-left: auto;
+}
+
+.nav-link {
+    margin: auto 0.6rem;
+    font-size: 1.1rem;
+}
+
