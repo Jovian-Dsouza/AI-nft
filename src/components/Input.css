@@ -1,0 +1,35 @@
+.input-container {
+    height: 50px;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+input.form-control {
+    border-right-width: 0;
+    outline: none;
+}
+
+input.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.input-group-append {
+    background: white;
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    border: 1px solid;
+    border-color: #dee2e6;
+    display: flex;
+}
+
+.btn {
+    background: -webkit-linear-gradient(left, #60c657, #35aee2);
+    background-size: 200% 200%;
+    animation: gradient-animation 4s ease infinite;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    margin: auto;
+    margin-right: 0.3rem;
+}
