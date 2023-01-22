@@ -6,7 +6,9 @@ import { Input } from "./components/Input";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { ConnectButton } from "./components/ConnectButton";
+import { predict } from "./scripts/replicate-api";
 
+console.log(process.env.REACT_APP_BASE_URL);
 // Constants
 const EXAMPLE_PATH = "./stable-diffusion-examples/";
 
@@ -30,17 +32,53 @@ const App = () => {
     }
     const accounts = await ethereum.request({ method: "eth_accounts" });
 
-    if (accounts.length != 0) {
+    if (accounts.length !== 0) {
       setCurrentAccount(accounts[0]);
     } else {
       console.log("Could not find authorized account");
     }
   };
 
+  const getPrediction = async (prompt) => {
+    const input = {
+      prompt: prompt,
+      num_outputs: 1,
+      width: 768,
+      height: 768,
+      num_inference_steps: 50,
+      guidance_scale: 7.5,
+      scheduler: "DPMSolverMultistep",
+    };
+
+    try {
+      let output = await predict(
+        `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_PATH}`,
+        process.env.REACT_APP_API_KEY,
+        process.env.REACT_APP_MODEL_VERSION,
+        input
+      );
+      console.log(output);
+      return output;
+    } catch (error) {
+      console.error(error);
+    }
+    return null;
+  }
+
+  const handleOnCreate = (promptText) => {
+    console.log("Prompt Text ", promptText);
+    let output = null;
+    (async () => {
+      output = await getPrediction(promptText);
+      console.log(output);
+    })();
+    
+  };
+
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
-  
+
   return (
     <div className="App">
       <div className="container-fluid app-container">
@@ -67,7 +105,7 @@ const App = () => {
                 Click on Create button to get your own NFT now.
               </p>
 
-              <Input />
+              <Input onCreate={handleOnCreate} />
             </div>
 
             {/* Carousel  */}
