@@ -23,7 +23,7 @@
     "start:production": "npm run build && npm run start:prodserver",
     "start:prodserver": "node server",
     "start:dev": "npm run build && npm run start:devserver",
-    "start:devserver" : "nodemon server",
+    "start:devserver": "nodemon server-dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
