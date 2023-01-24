@@ -16,6 +16,10 @@ contract StableDiffusionNFT is ERC721URIStorage {
 
     constructor() ERC721("StableDiffusionNFT", "SDNFT") {}
 
+    function totalNFTs() view public returns(uint256){
+        return _tokenIds.current();
+    }
+
     function mintNFT(string memory url, string memory desc)
         public
         returns (uint256)
