@@ -24,4 +24,6 @@ yarn-error.log*
 .env
 .env.local
 
-/scripts
+/my_scripts
+artifacts
+cache
