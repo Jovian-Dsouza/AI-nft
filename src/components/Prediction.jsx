@@ -33,13 +33,30 @@ export function Prediction(props) {
     return "";
   };
 
+  const addToIPFS = async (url, name) => {
+    const resp = await fetch(`${process.env.REACT_APP_BASE_URL}/addIPFS`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url: url,
+        name: name,
+      }),
+    });
+    const result = await resp.json();
+    return result["result"];
+  };
+
   const handleOnCreate = (promptText) => {
     console.log("Prompt Text ", promptText);
     setShow(true);
     (async () => {
       const output = await getPrediction(promptText);
       console.log(output);
-      setImgSrc(output);
+      const result = await addToIPFS(output, "test");
+      console.log(result);
+      setImgSrc(result);
     })();
   };
 
