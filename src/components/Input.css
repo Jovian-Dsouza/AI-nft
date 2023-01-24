@@ -30,6 +30,9 @@ input.form-control:focus {
     font-size: 1rem;
     font-weight: bold;
     color: white;
+}
+
+.input-btn {
     margin: auto;
     margin-right: 0.3rem;
 }

@@ -33,7 +33,7 @@ export function Input(props) {
       />
       <div class="input-group-append">
         <button
-          class="btn btn-outline-secondary"
+          class="btn btn-outline-secondary input-btn"
           type="button"
           onClick={handleOnClick}
         >
