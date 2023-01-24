@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles/App.css";
-import { ethers } from "ethers";
 import { Carousel } from "./components/Carousel";
-import { Input } from "./components/Input";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { ConnectButton } from "./components/ConnectButton";
@@ -40,7 +38,6 @@ const App = () => {
     }
   };
 
-  
 
   useEffect(() => {
     checkIfWalletIsConnected();
@@ -72,7 +69,7 @@ const App = () => {
                 Click on Create button to get your own NFT now.
               </p>
               
-              <Prediction />
+              <Prediction account={currentAccount}/>
             </div>
 
             {/* Carousel  */}

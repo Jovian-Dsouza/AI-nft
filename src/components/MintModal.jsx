@@ -28,9 +28,22 @@ export function MintModal(props) {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button className="modal-btn" onClick={handleModal}>
-            Mint Now
-          </Button>
+          {props.disableMint === true ? (
+            <div>
+              <button
+                type="button"
+                class="modal-btn btn btn-primary disable"
+                onClick={console.log("Button disable")}
+              >
+                Mint Now
+              </button>
+              <p className="modal-error-text">Connect your wallet to Mint</p>
+            </div>
+          ) : (
+            <Button className="modal-btn" onClick={props.onMint}>
+              Mint Now
+            </Button>
+          )}
         </Modal.Footer>
       </div>
     </Modal>

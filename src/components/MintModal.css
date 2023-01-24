@@ -63,6 +63,11 @@
     height: 3rem;
 }
 
+.modal-error-text {
+    color: red;
+    margin-top:0.5rem;
+}
+
 .modal-footer {
     margin-bottom: 2rem;
     justify-content: center;

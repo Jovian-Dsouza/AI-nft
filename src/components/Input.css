@@ -32,6 +32,13 @@ input.form-control:focus {
     color: white;
 }
 
+.disable {
+    background: grey;
+    pointer-events: none;
+}
+
+
+
 .input-btn {
     margin: auto;
     margin-right: 0.3rem;
