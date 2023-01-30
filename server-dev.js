@@ -20,21 +20,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post("/v1/predictions", function(req, res){
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ id: 1, status: "starting...", error: null }));
-});
-
-app.get("/v1/predictions/:id", function(req, res){
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ 
-      id: 1, 
-      status: 'succeded', 
-      error: null, 
-      output: ['https://replicate.delivery/pbxt/f4nlztv3uz1iFC4AEf2wBYQGTezdVeysvtZUtwfsvZOJDN6AC/out-0.png'],
-    }));
-});
-
 app.post("/addIPFS", async function(req, res){
     const result = await ipfs.addToIPFS(req.body.url, req.body.name);
     res.setHeader('Content-Type', 'application/json');

@@ -4,6 +4,7 @@ import { Input } from "./Input";
 import { predict } from "../scripts/replicate-api";
 import { ethers } from "ethers";
 import stableDiffusionNFT from "../assets/StableDiffusionNFT.json";
+const { Configuration, OpenAIApi } = require("openai");
 
 export function Prediction(props) {
   const CONTRACT_ADDRESS = "0x48aD17c98762060514d135E5CCa9A4451f488Fb6";
@@ -13,30 +14,24 @@ export function Prediction(props) {
   const [imgSrc, setImgSrc] = useState("");
   const [promptText, setPromptText] = useState("");
 
-  const getPrediction = async (prompt) => {
-    const input = {
-      prompt: prompt,
-      num_outputs: 1,
-      width: 768,
-      height: 768,
-      num_inference_steps: 50,
-      guidance_scale: 7.5,
-      scheduler: "DPMSolverMultistep",
-    };
+  const configuration = new Configuration({
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
 
+  const getPrediction = async (prompt) => {
     try {
-      let output = await predict(
-        `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_PATH}`,
-        process.env.REACT_APP_API_KEY,
-        process.env.REACT_APP_MODEL_VERSION,
-        input
-      );
-      return output[0];
-    } catch (error) {
-      console.error(error);
+      const response = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: "512x512",
+      });
+      const image_url = response.data.data[0].url;
+      return image_url;
+    } catch (e) {
+      console.error(e);
       return "";
     }
-    return "";
   };
 
   const addToIPFS = async (url, name) => {
@@ -113,21 +108,9 @@ export function Prediction(props) {
       const output = await getPrediction(promptText);
       console.log(output);
 
-      if(props.account !== ""){
-       
-        const nftNumber = await totalNFTs();
-        const nftName = `Stability AI #${nftNumber.toString()}`;
-        console.log("nftName: ", nftName);
+      setImgSrc(output);
+      setPromptText(promptText);
 
-        const result = await addToIPFS(output, nftName);
-        console.log(result);
-
-        setImgSrc(result);
-        setPromptText(promptText);
-      }
-      else{
-        setImgSrc(output);
-      }
     })();
   };
 
@@ -137,10 +120,18 @@ export function Prediction(props) {
   };
 
   const handleMint = () => {
-    // (async () => {
-      mintNFT(imgSrc, promptText);
-      handleToggle();
-    // })();
+    (async () => {
+      if (props.account !== "") {
+        const nftNumber = await totalNFTs();
+        const nftName = `Stability AI #${nftNumber.toString()}`;
+        console.log("nftName: ", nftName);
+
+        const result = await addToIPFS(imgSrc, nftName);
+        console.log(result);
+        mintNFT(result, promptText);
+      }
+    })();
+    handleToggle();
   };
 
   return (
