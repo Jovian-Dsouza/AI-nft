@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MintModal } from "./MintModal";
 import { Input } from "./Input";
 import { ethers } from "ethers";
@@ -70,6 +70,7 @@ export function Prediction(props) {
         const { tokenId } = transferEvent.args;
 
         console.log("NFT minted: ", `${OPENSEA_LINK}/${tokenId.toString()}`);
+        alert(`NFT minted: ${OPENSEA_LINK}/${tokenId.toString()}`);
         return tokenId;
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -101,6 +102,37 @@ export function Prediction(props) {
     }
   };
 
+  const setupEventListners = async () => {
+    if (props.account !== "") {
+      console.log("setting up event listeners");
+      try {
+        const { ethereum } = window;
+
+        if (ethereum) {
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const signer = provider.getSigner();
+          const contract = new ethers.Contract(
+            CONTRACT_ADDRESS,
+            stableDiffusionNFT.abi,
+            signer
+          );
+
+          contract.on("NewNFTMinted", (from, tokenId) => {
+            alert(`NFT minted: ${OPENSEA_LINK}/${tokenId.toString()}`);
+          });
+        } else {
+          console.log("Ethereum object doesn't exist!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  // useEffect(() => {
+  //   setupEventListners();
+  // });
+
   // Callbacks
 
   const handleOnCreate = (promptText) => {
@@ -112,7 +144,6 @@ export function Prediction(props) {
 
       setImgSrc(output);
       setPromptText(promptText);
-
     })();
   };
 
