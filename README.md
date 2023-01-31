@@ -12,7 +12,7 @@
   <p align="center">
     A website to mint NFT using generative AI
     <br />
-    <a href="https://ainft.joviandsouza.repl.co/">View Demo</a>
+    <a href="https://ai-nft.joviandsouza.repl.co/">View Demo</a>
     ·
     <a href="https://github.com/Jovian-Dsouza/AI-nft/issues">Report Bug</a>
     ·
@@ -24,7 +24,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Demo](images/demo_mint.png)](https://ainft.joviandsouza.repl.co/)
+[![Demo](images/demo_mint.png)](https://ai-nft.joviandsouza.repl.co/)
 [![OpenSea Demo](images/demo_opensea.png)](https://testnets.opensea.io/collection/stablediffusionnft-bqmipytzf0)
 
 AI-NFT is an ERC721 based NFT Contract currently deployed on the Ethereum Goerli test network. This project is for learning purposes only. ERC-721 tokens are the standards for non-fungible tokens (NFTs). These tokens cannot be exchanged for anything of equal value since they are unique in themselves, representing a unique asset. Each NFT token is linked to different owners and has its own tokenID. This projects creates an NFT from Text-to-Image AI and allows your to mint and trade it on the [OpenSea](https://opensea.io/) platform.
@@ -36,7 +36,7 @@ Here are some cool features of this project:
 * Based on ERC721 Contract
 * Deployed NFT is OpenSea compatible, allowing users to show off and trade their NFTs
 
-Live project Demo : [Click Here](https://ainft.joviandsouza.repl.co/)
+Live project Demo : [Click Here](https://ai-nft.joviandsouza.repl.co/)
 Minted NFTs on OpenSea : [Click Here](https://testnets.opensea.io/collection/stablediffusionnft-bqmipytzf0) 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
