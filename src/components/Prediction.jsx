@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { MintModal } from "./MintModal";
 import { Input } from "./Input";
-import { predict } from "../scripts/replicate-api";
 import { ethers } from "ethers";
 import stableDiffusionNFT from "../assets/StableDiffusionNFT.json";
-const { Configuration, OpenAIApi } = require("openai");
 
 export function Prediction(props) {
   const CONTRACT_ADDRESS = "0x48aD17c98762060514d135E5CCa9A4451f488Fb6";
@@ -14,20 +12,24 @@ export function Prediction(props) {
   const [imgSrc, setImgSrc] = useState("");
   const [promptText, setPromptText] = useState("");
 
-  const configuration = new Configuration({
-    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-  });
-  const openai = new OpenAIApi(configuration);
-
   const getPrediction = async (prompt) => {
     try {
-      const response = await openai.createImage({
-        prompt: prompt,
-        n: 1,
-        size: "512x512",
-      });
-      const image_url = response.data.data[0].url;
-      return image_url;
+      const resp = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getPrediction`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: prompt,
+            n: 1,
+            size: "512x512",
+          }),
+        }
+      );
+      const result = await resp.json();
+      return result["result"];
     } catch (e) {
       console.error(e);
       return "";

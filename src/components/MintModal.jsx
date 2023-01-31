@@ -33,7 +33,7 @@ export function MintModal(props) {
               <button
                 type="button"
                 class="modal-btn btn btn-primary disable"
-                onClick={console.log("Button disable")}
+                onClick={console.log("Please connect your wallet first")}
               >
                 Mint Now
               </button>
