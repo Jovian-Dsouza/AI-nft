@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { MintModal } from "./MintModal";
+import { Modal } from "react-bootstrap";
 import { Input } from "./Input";
 import { ethers } from "ethers";
 import stableDiffusionNFT from "../assets/StableDiffusionNFT.json";
+import miningGif from "../assets/dogecoin-doge.gif";
+import "./Prediction.css";
 
 export function Prediction(props) {
   const CONTRACT_ADDRESS = "0x48aD17c98762060514d135E5CCa9A4451f488Fb6";
@@ -11,6 +14,7 @@ export function Prediction(props) {
   const [show, setShow] = useState(false);
   const [imgSrc, setImgSrc] = useState("");
   const [promptText, setPromptText] = useState("");
+  const [showMining, setShowMining] = useState(false);
 
   const getPrediction = async (prompt) => {
     try {
@@ -71,6 +75,8 @@ export function Prediction(props) {
 
         console.log("NFT minted: ", `${OPENSEA_LINK}/${tokenId.toString()}`);
         alert(`NFT minted: ${OPENSEA_LINK}/${tokenId.toString()}`);
+        setShowMining(false);
+
         return tokenId;
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -155,6 +161,7 @@ export function Prediction(props) {
   const handleMint = () => {
     (async () => {
       if (props.account !== "") {
+        setShowMining(true);
         const nftNumber = await totalNFTs();
         const nftName = `Stability AI #${nftNumber.toString()}`;
         console.log("nftName: ", nftName);
@@ -176,6 +183,15 @@ export function Prediction(props) {
         onMint={handleMint}
         disableMint={props.account === ""}
       />
+
+      <Modal className="mining-modal-content" show={showMining}>
+        <div className="modal-container mining-modal">
+          <Modal.Body className="mining-modal-body">
+            <img className="" src={miningGif} />
+          </Modal.Body>
+        </div>
+      </Modal>
+
       <Input onCreate={handleOnCreate} />
     </div>
   );
