@@ -29,6 +29,14 @@ const App = () => {
       console.log("Make sure you have metamask");
       return;
     }
+
+    let chainId = await ethereum.request({ method: "eth_chainId" });
+    const goerliChainId = "0x5";
+    if (chainId !== goerliChainId) {
+      alert("You are not connected to the Goerli Test Network!");
+    }
+    
+
     const accounts = await ethereum.request({ method: "eth_accounts" });
 
     if (accounts.length !== 0) {
